@@ -14,12 +14,10 @@ def download(download_url):
 
 
 if __name__ == "__main__":
-    response = requests.get("http://minecraft.net/download")
-    soup = bs4.BeautifulSoup(response.text)
+    response = requests.get("https://www.minecraft.net/en-us/download/server/")
+    soup = bs4.BeautifulSoup(response.text, "html.parser")
     link = soup("a", attrs={
-        "class": "download-link",
-        "data-dist": "server",
-        "data-platform": "linux"
+        "aria-label": "mincraft version"
     })
     download_url = link[0]["href"]
     try:
